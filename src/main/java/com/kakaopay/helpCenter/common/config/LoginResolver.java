@@ -1,4 +1,4 @@
-package com.kakaopay.helpCenter.config;
+package com.kakaopay.helpCenter.common.config;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -6,7 +6,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class HelpCenterResolver implements HandlerMethodArgumentResolver {
+public class LoginResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return false;
