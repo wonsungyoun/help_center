@@ -18,7 +18,7 @@ public class HelpCenterApiController {
 
     @PatchMapping("/api/counselor/assignment")
     public synchronized int counselorAssignment() {
-
+        return 0;
     }
 
 
