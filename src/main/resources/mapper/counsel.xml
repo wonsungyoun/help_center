@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakaopay.helpcenter.mapper.CounselMapper">
+    <select id="getCounselDataList" resultType="com.kakaopay.helpcenter.model.CounselData">
+        SELECT
+            counsel.no as id
+             , counsel.create_id as createId
+            , counselor.user_name as counselorName
+            , counsel.questions_title as title
+            , counsel.questions_detail as detail
+            , counsel.answer as answer
+            , counsel.reg_date as regTime
+            , counsel.answer_date as answerTime
+        FROM counsel counsel
+        LEFT OUTER JOIN counselor counselor
+        ON counsel.counselor_id = counselor.id
+    </select>
+</mapper>

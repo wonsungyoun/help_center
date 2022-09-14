@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>질문 작성</title>
+</head>
+<body>
+<form th:action="@{/customer/questions/write}" id="questions" th:object="${questions}" method="post" th:onsubmit="checkQuestionsData()">
+    <div>
+        <label>고객아이디</label>
+        <label><input type="text" id="createId" th:field="*{createId}"></label>
+    </div>
+    <div>
+        <label>제목</label>
+        <label><input type="text" id="questionsTitle" th:field="*{questionsTitle}"></label>
+    </div>
+    <div>
+        <label>내용</label>
+        <label>
+            <textarea id="questionsDetail" th:field="*{questionsDetail}"></textarea>
+        </label>
+    </div>
+    <div>
+        <input type="submit"
+               value="질문등록">
+        <script type="text/javascript">
+            const checkQuestionsData = () => {
+                const createId = document.getElementById("createId").value;
+                const questionsTitle = document.getElementById("questionsTitle").value;
+                const questionsDetail = document.getElementById("questionsDetail").value;
+
+                if(createId === null || createId === undefined || createId == '') {
+                    alert("고객아이디를 입력해주세요");
+                    return false;
+                }
+
+                if(questionsTitle === null || questionsTitle === undefined || questionsTitle == '') {
+                    alert("제목을 입력해주세요");
+                    return false;
+                }
+
+                if(questionsDetail === null || questionsDetail === undefined|| questionsDetail == '') {
+                    alert("내용을 입력해주세요");
+                    return false;
+                }
+
+            }
+        </script>
+    </div>
+</form>
+</body>
+</html>

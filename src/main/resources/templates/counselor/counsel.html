@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>상담사 미답변 목록 페이지</title>
+</head>
+<body>
+    <div>
+        <h2>상담사 미답변 목록</h2>
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+                <th>아이디</th>
+                <th>질문 제목</th>
+                <th>상세질문</th>
+                <th>지정</th>
+            </thead>
+            <tbody>
+            <tr th:each="counsel, i : ${counselList}">
+                <td th:text="${counsel.createId}"></td>
+                <td th:text="${counsel.title}"></td>
+                <td th:text="${counsel.detail}"></td>
+                <td><input type="button" value="지정"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 질문과 답변 목록 페이지</title>
+</head>
+<body>
+<div>
+    <div>
+        <h2>질문과 답변 목록</h2>
+    </div>
+    <table border="1">
+        <thead>
+        <th>아이디</th>
+        <th>상담사</th>
+        <th>질문제목</th>
+        <th>상세질문</th>
+        <th>답변</th>
+        </thead>
+        <tbody>
+        <tr th:each="counsel, i : ${counselList}">
+            <td th:text="${counsel.createId}"></td>
+            <td th:text="${counsel.counselorName}"></td>
+            <td th:text="${counsel.title}"></td>
+            <td th:text="${counsel.detail}"></td>
+            <td th:text="${counsel.answer}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <input type="button" th:onclick="goWrite()"
+           value="질문등록">
+    <script type="text/javascript">
+        const goWrite = () => {
+            location.href="/customer/questions";
+        }
+    </script>
+</div>
+
+</body>
+</html>
