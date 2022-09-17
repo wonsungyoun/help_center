@@ -5,37 +5,26 @@
     <title>답변 작성</title>
 </head>
 <body>
-<form th:action="@{/customer/questions/write}" id="questions" th:object="${questions}" method="post" th:onsubmit="checkQuestionsData()">
-
+<form th:action="@{/counselor/answer/write}" id="questions" th:object="${answer}" method="POST" th:onsubmit="checkAnswerData()">
+    <input type ="hidden" th:field="*{no}">
     <div>
         <label>답변</label>
         <label>
-            <textarea id="questionsDetail" th:field="*{questionsDetail}"></textarea>
+            <textarea id="questionsDetail" th:field="*{answer}"></textarea>
         </label>
     </div>
     <div>
         <input type="submit"
                value="답변">
         <script type="text/javascript">
-            const checkQuestionsData = () => {
-                const createId = document.getElementById("createId").value;
-                const questionsTitle = document.getElementById("questionsTitle").value;
-                const questionsDetail = document.getElementById("questionsDetail").value;
+            const checkAnswerData = () => {
+                const answer = document.getElementById("answer").value;
 
-                if(createId === null || createId === undefined || createId == '') {
-                    alert("고객아이디를 입력해주세요");
+                if(answer === null || answer === undefined || answer == '') {
+                    alert("답변을 입력해주세요");
                     return false;
                 }
 
-                if(questionsTitle === null || questionsTitle === undefined || questionsTitle == '') {
-                    alert("제목을 입력해주세요");
-                    return false;
-                }
-
-                if(questionsDetail === null || questionsDetail === undefined|| questionsDetail == '') {
-                    alert("내용을 입력해주세요");
-                    return false;
-                }
 
             }
         </script>

@@ -2,7 +2,6 @@ package com.kakaopay.helpcenter.service;
 
 import com.kakaopay.helpcenter.entity.Counsel;
 import com.kakaopay.helpcenter.mapper.CounselMapper;
-import com.kakaopay.helpcenter.model.CounselData;
 import com.kakaopay.helpcenter.repository.CounselRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -41,20 +40,12 @@ public class CounselServiceTest {
         Assert.assertTrue(faqList.size()>0); // 정상적으로 조회가 되어야 함.
     }
 
-    @DisplayName("조회 로직 테스트")
-    @Test
-    public void findAllByCounselorIdIsNullRealLogic() {
-        List<Counsel> faqList = counselService.findAllByCounselorIdIsNull();
-
-        Assert.assertTrue(faqList.size()>0); // 정상적으로 조회가 되어야 함.
-    }
-
     @Test
     public void getCounselDataList() {
-        List<CounselData>  counselDataList = counselMapper.getCounselDataList();
+        List<com.kakaopay.helpcenter.dto.CounselData> counselDataDataList = counselMapper.getCounselDataList();
 
-        log.info("::::::::::{}", counselDataList);
+        log.info("::::::::::{}", counselDataDataList);
 
-        Assert.assertTrue(counselDataList.size() > 0);
+        Assert.assertTrue(counselDataDataList.size() > 0);
     }
 }

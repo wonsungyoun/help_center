@@ -13,4 +13,5 @@ public interface CounselRepository extends JpaRepository<Counsel, Long> {
 
     List<Counsel> findAllByCounselorIdIsNull();
 
+    Counsel findAllByNo(Long no);
 }

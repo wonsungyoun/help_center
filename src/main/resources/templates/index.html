@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>상담 페이지</title>
+</head>
+<body>
+  <div>
+    <span th:onclick="goCustomerPage()" style="cursor: pointer">고객페이지이동</span>
+    <script type="text/javascript">
+      const goCustomerPage = () => {
+        location.href="/customer/counsel/list";
+      }
+    </script>
+  </div>
+  <div>
+    <span th:onclick="goCounselorPage()" style="cursor: pointer">상담사페이지이동</span>
+    <script type="text/javascript">
+      const goCounselorPage = () => {
+        location.href="/counselor/counsel/list";
+      }
+    </script>
+  </div>
+</body>
+</html>

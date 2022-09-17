@@ -4,30 +4,166 @@
 <head>
     <meta charset="UTF-8">
     <title>상담사 미답변 목록 페이지</title>
+
 </head>
 <body>
     <div>
-        <h2>상담사 미답변 목록</h2>
+        <h2>상담사 미지정 목록</h2>
     </div>
     <div>
-        <table border="1">
+        <table border="1" >
             <thead>
                 <th>아이디</th>
                 <th>질문 제목</th>
                 <th>상세질문</th>
                 <th>지정</th>
             </thead>
-            <tbody>
-            <tr th:each="counsel, i : ${counselList}">
+            <tbody id="unspecifiedTable">
+            <tr  th:each="counsel: ${unspecifiedCounselDataList}">
                 <td th:text="${counsel.createId}"></td>
                 <td th:text="${counsel.title}"></td>
                 <td th:text="${counsel.detail}"></td>
-                <td><input type="button" value="지정"></td>
+                <td><input type="button" value="지정" th:onclick="appointedCounselor([[${counsel.no}]])"></td>
             </tr>
             </tbody>
         </table>
-
     </div>
 
+    <div>
+        <h2>본인 지정 미답변 목록</h2>
+    </div>
+    <div>
+        <table border="1" >
+            <thead>
+            <th>아이디</th>
+            <th>질문 제목</th>
+            <th>상세질문</th>
+            <th>작성</th>
+            </thead>
+            <tbody id="appointTable"  >
+            <tr   th:each="counsel, i : ${appointedCounselDataList}">
+                <td th:text="${counsel.createId}"></td>
+                <td th:text="${counsel.title}"></td>
+                <td th:text="${counsel.detail}"></td>
+                <td><input type="button" value="답변" th:onclick="goWrite([[${counsel.no}]])"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <input type="button" th:onclick="goCustomerPage()" value="고객페이지">
+    </div>
+    <script type="text/javascript">
+
+        const goCustomerPage = () => {
+            location.href = "/customer/counsel/list";
+        }
+
+        /**
+         * 상담사 지정
+         * @param no
+         */
+        const appointedCounselor = no => {
+            fetch("/api/counselor/assignment",{
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body : JSON.stringify({
+                    no : no
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.appointStatus === 'APPOINT_SUCCESS') {
+                        alert("지정 완료 되었습니다.");
+                        counselDataLoad(data);
+                    }else if(data.appointStatus === 'APPOINT_OVERLAP') {
+                        alert("이미 지정된 상담건 입니다")
+                    }else {
+                        alert("지정 실패")
+                    }
+                });
+        }
+
+        /**
+         * 답변페이지로 이동
+         * @param no
+         */
+        const goWrite = no => {
+            location.href="/counselor/answer/" + no;
+        }
+
+        /**
+         * 10초 마다 상담 리스트 호출
+         * @type {number}
+         */
+        const timer = setInterval(() => {
+            fetch('/api/counselor/getCounselList',{
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    counselDataLoad(data);
+                })
+        },10000)
+
+        /**
+         * 상담 리스트를 화면에 표시되게 하는 기능.
+         * @param data
+         */
+        const counselDataLoad = (data) => {
+            const unspecifiedTable = document.getElementById("unspecifiedTable");
+            const appointTable = document.getElementById("appointTable");
+
+            const unspecifiedCounselDataList = data.unspecifiedCounselDataList;
+            const appointedCounselDataList = data.appointedCounselDataList;
+
+            if(unspecifiedTable != null) {
+                unspecifiedTable.innerHTML = '';
+            }
+            if(appointTable != null) {
+                appointTable.innerHTML = '';
+            }
+
+            for(let i=0; i<unspecifiedCounselDataList.length; i++) {
+
+                let unspecifiedCounselData =  unspecifiedCounselDataList[i];
+
+                let unspecifiedTableRow = unspecifiedTable.insertRow(-1);
+                let unspecifiedTableCell1 = unspecifiedTableRow.insertCell(0);
+                let unspecifiedTableCell2 = unspecifiedTableRow.insertCell(1);
+                let unspecifiedTableCell3 = unspecifiedTableRow.insertCell(2);
+                let unspecifiedTableCell4 = unspecifiedTableRow.insertCell(3);
+
+                unspecifiedTableCell1.innerText = unspecifiedCounselData.createId;
+                unspecifiedTableCell2.innerText = unspecifiedCounselData.title;
+                unspecifiedTableCell3.innerText = unspecifiedCounselData.detail;
+                unspecifiedTableCell4.innerHTML
+                    = '<input type="button" value="지정" onclick="appointedCounselor(' + unspecifiedCounselData.no + ')">';
+            }
+
+            for(let i=0; i<appointedCounselDataList.length; i++) {
+
+                let appointedCounselData = appointedCounselDataList[i];
+
+                let appointTableRow = appointTable.insertRow(-1); // 최근
+                let appointTableCell1 = appointTableRow.insertCell(0);
+                let appointTableCell2 = appointTableRow.insertCell(1);
+                let appointTableCell3 = appointTableRow.insertCell(2);
+                let appointTableCell4 = appointTableRow.insertCell(3);
+
+                appointTableCell1.innerText = appointedCounselData.createId;
+                appointTableCell2.innerText = appointedCounselData.title;
+                appointTableCell3.innerText = appointedCounselData.detail;
+                appointTableCell4.innerHTML = '<input type="button" value="답변" onclick="goWrite(' + appointedCounselData.no + ')">';
+            }
+
+        }
+
+    </script>
 </body>
 </html>

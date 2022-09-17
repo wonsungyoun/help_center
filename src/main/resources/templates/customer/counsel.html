@@ -11,14 +11,14 @@
     </div>
     <table border="1">
         <thead>
-        <th>아이디</th>
-        <th>상담사</th>
-        <th>질문제목</th>
-        <th>상세질문</th>
-        <th>답변</th>
+            <th>아이디</th>
+            <th>상담사</th>
+            <th>질문제목</th>
+            <th>상세질문</th>
+            <th>답변</th>
         </thead>
-        <tbody>
-        <tr th:each="counsel, i : ${counselList}">
+        <tbody id="counselTable">
+        <tr th:each="counsel : ${counselList}">
             <td th:text="${counsel.createId}"></td>
             <td th:text="${counsel.counselorName}"></td>
             <td th:text="${counsel.title}"></td>
@@ -29,14 +29,69 @@
     </table>
 </div>
 <div>
-    <input type="button" th:onclick="goWrite()"
+    <div>
+        <input type="button" th:onclick="goWrite()"
            value="질문등록">
-    <script type="text/javascript">
-        const goWrite = () => {
-            location.href="/customer/questions";
-        }
-    </script>
+    </div>
+    <div th:if="${isCounselorSession == true}">
+        <input type="button" th:onclick="goCounselorPage()"
+               value="상담사페이지">
+    </div>
 </div>
+<script type="text/javascript">
+
+    const goWrite = () => {
+        location.href="/customer/questions";
+    }
+
+    const goCounselorPage = () => {
+        location.href="/counselor/counsel/list";
+    }
+
+    const timer = setInterval(() => {
+        fetch('/api/customer/getCustomerCounselList',{
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                counselDataLoad(data);
+            })
+    },10000)
+
+    const counselDataLoad = (data) => {
+        const counselTable = document.getElementById("counselTable");
+
+        const list = data;
+
+        if(counselTable != null) {
+            counselTable.innerHTML = '';
+        }
+
+        for(let i=0; i<list.length; i++){
+            let counselData = list[i];
+
+            let tabRow = counselTable.insertRow(-1);
+
+            let cell1 = tabRow.insertCell(0);
+            let cell2 = tabRow.insertCell(1);
+            let cell3 = tabRow.insertCell(2);
+            let cell4 = tabRow.insertCell(3);
+            let cell5 = tabRow.insertCell(4);
+
+            cell1.innerText = counselData.createId;
+            cell2.innerText = counselData.counselorName;
+            cell3.innerText = counselData.title;
+            cell4.innerText = counselData.detail;
+            cell5.innerText = counselData.answer;
+        }
+
+    }
+
+</script>
+
 
 </body>
 </html>

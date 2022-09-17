@@ -46,4 +46,38 @@ public class Counsel {
         this.regTime = regTime;
         this.answerTime = answerTime;
     }
+
+    /**
+     * 상담사 지정
+     * @param counselorId 지정될 상담사 아이디
+     */
+    public void appointCounselor(String counselorId) {
+        this.counselorId = counselorId;
+    }
+
+    /**
+     * 답변 작성
+     * @param answer
+     */
+    public void writeAnswer(String answer) {
+        this.answer = answer;
+        this.answerTime = new Date();
+    }
+
+    /**
+     * DTO 반환
+     * @return
+     */
+    public com.kakaopay.helpcenter.dto.CounselData getCounselData() {
+        return com.kakaopay.helpcenter.dto.CounselData.builder()
+                    .no(this.no)
+                    .createId(this.createId)
+                    .counselorId(this.counselorId)
+                    .title(this.title)
+                    .detail(this.detail)
+                    .answer(this.answer)
+                    .regTime(this.regTime.toString())
+                    .answerTime(this.answerTime.toString())
+                .build();
+    }
 }

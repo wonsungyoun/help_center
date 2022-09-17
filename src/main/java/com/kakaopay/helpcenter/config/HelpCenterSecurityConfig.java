@@ -62,20 +62,24 @@ public class HelpCenterSecurityConfig {
         return (web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
     }
 
-
-
+    /**
+     * 시큐리티 필터 설정
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
 
         // 접근 설정
         http.authorizeHttpRequests()
-                .antMatchers("/customer/**","/customer/counsel/**","/h2/**","/h2-console/**","/login/**").permitAll() // 허용
+                .antMatchers("/","/customer/**","/customer/counsel/**","/api/customer/**","/h2/**","/h2-console/**","/login/**").permitAll() // 허용
                 .anyRequest().authenticated()
                 .and().csrf().disable()
             .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/counselor/counsel/list")
+                .defaultSuccessUrl("/counselor/counsel/list", true)
                 .failureUrl("/login")
                 .permitAll()
                 .and()
