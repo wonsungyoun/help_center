@@ -10,6 +10,7 @@ help_center
 |db|h2 database|
 |프레임워크|스프링부트(스프링 시큐리티, 스프링 데이타 JPA) 활용|
 |빌드 툴|gradle|
+|개발OS|macOS|
 
 백엔드 구성 :
 - 화면을 제어하는 뷰컨트롤러, ajax로 api 호출시 응답하는 api 컨트롤러로 컨트롤러단 구성
