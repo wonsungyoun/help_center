@@ -20,7 +20,9 @@ help_center
 - dto는 서버간, 서비스에서 별도의 로직, 요청 및 응답등에 사용하기 위해 쓰임.
 
 실행방법 :
-
+$ git clone https://github.com/wonsungyoun/help_center.git
+$ cd help_center
+$ ./gradlew clean build
 
 
 
