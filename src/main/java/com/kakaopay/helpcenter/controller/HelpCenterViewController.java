@@ -31,7 +31,7 @@ public class HelpCenterViewController {
         this.counselService = counselService;
     }
 
-    @GetMapping("/")
+    @GetMapping("index")
     public String hello() {
         return "index";
     }
