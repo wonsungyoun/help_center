@@ -7,7 +7,7 @@ help_center
 |------|---|
 |백엔드|JAVA 8|
 |프론트엔드|ES6, 타임리프|
-|RDBMS|h2 database|
+|db|h2 database|
 |프레임워크|스프링부트(스프링 시큐리티, 스프링 데이타 JPA) 활용|
 |빌드 툴|gradle|
 
