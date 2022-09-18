@@ -31,7 +31,7 @@ public class HelpCenterViewController {
         this.counselService = counselService;
     }
 
-    @GetMapping("index")
+    @GetMapping("/")
     public String hello() {
         return "index";
     }
@@ -94,7 +94,7 @@ public class HelpCenterViewController {
      */
     @GetMapping("/counselor/answer/{no}")
     public ModelAndView answer(@PathVariable Long no) {
-        ModelAndView modelAndView = new ModelAndView("/counselor/answer");
+        ModelAndView modelAndView = new ModelAndView("counselor/answer");
 
         modelAndView.addObject("answer",new AnswerData(no));
 
