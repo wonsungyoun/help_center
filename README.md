@@ -23,7 +23,6 @@ help_center
 $ git clone https://github.com/wonsungyoun/help_center.git
 $ cd help_center
 $ ./gradlew clean build
-$ java -jar build/libs/kakaopay-task3-0.0.1-SNAPSHOT.jar
 
 
 
