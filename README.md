@@ -20,12 +20,20 @@ help_center
 - dto는 서버간, 서비스에서 별도의 로직, 요청 및 응답등에 사용하기 위해 쓰임.
 
 실행방법 :
+(필수적으로 로컬에 java와 git이 설치되있어야한다)
 ```
    $ git clone https://github.com/wonsungyoun/help_center.git
    $ cd help_center
    $ ./gradlew clean build
    $ java -jar build/libs/help_center-0.0.1-SNAPSHOT.jar
 ```
+
+url :
+localhost:8080 - 기본 페이지
+http://localhost:8080/customer/counsel/list - 고객용 상담관리페이지
+http://localhost:8080/counselor/counsel/list - 상담사용 상담관리페이지 (로그인필요)
+
+로그인 계정 : import.sql 참고
 
 문제해결 전략 :
 1. 상담사의 상담페이지 같은 경우 스프링시큐리티를 활용하여 로그인 세션이 존재할때만 접근이 가능하게 하였고 고객의 상담페이지는 로그인세션이 없어도 별도로 접근가능하게 만듬
