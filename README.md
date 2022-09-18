@@ -29,7 +29,7 @@ help_center
 ```
 
 url :
-- localhost:8080 - 기본 페이지
+- http://localhost:8080 - 기본 페이지
 - http://localhost:8080/customer/counsel/list - 고객용 상담관리페이지
 - http://localhost:8080/counselor/counsel/list - 상담사용 상담관리페이지 (로그인필요)
 
