@@ -1,5 +1,6 @@
 package com.kakaopay.helpcenter.service;
 
+import com.kakaopay.helpcenter.dto.CounselData;
 import com.kakaopay.helpcenter.entity.Counsel;
 import com.kakaopay.helpcenter.mapper.CounselMapper;
 import com.kakaopay.helpcenter.repository.CounselRepository;
@@ -42,9 +43,7 @@ public class CounselServiceTest {
 
     @Test
     public void getCounselDataList() {
-        List<com.kakaopay.helpcenter.dto.CounselData> counselDataDataList = counselMapper.getCounselDataList();
-
-        log.info("::::::::::{}", counselDataDataList);
+        List<CounselData> counselDataDataList = counselMapper.getCounselDataList();
 
         Assert.assertTrue(counselDataDataList.size() > 0);
     }
